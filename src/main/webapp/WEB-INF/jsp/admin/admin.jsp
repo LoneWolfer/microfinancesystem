@@ -1,3 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ln
+  Date: 2018/3/9 0008
+  Time: 09:06
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +17,10 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>首页 · 后台模板 HTML</title>
-    <link rel="stylesheet" href="frame/layui/css/layui.css">
-    <link rel="stylesheet" href="./frame/static/css/style.css">
-    <link rel="icon" href="./frame/static/image/code.png">
+    <title>首页 · 后台系统</title>
+    <link rel="stylesheet" href="<%=basePath%>frame/layui/css/layui.css">
+    <link rel="stylesheet" href="<%=basePath%>frame/static/css/style.css">
+    <link rel="icon" href="<%=basePath%>frame/static/image/code.png">
 </head>
 <body>
 
@@ -16,9 +28,9 @@
 <div class="layui-layout layui-layout-admin"> <!-- 添加skin-1类可手动修改主题为纯白，添加skin-2类可手动修改主题为蓝白 -->
     <!-- header -->
     <div class="layui-header my-header">
-        <a href="index.html">
+        <a href="admin">
             <!--<img class="my-header-logo" src="" alt="logo">-->
-            <div class="my-header-logo">后台模板 HTML</div>
+            <div class="my-header-logo">后台管理系统</div>
         </a>
         <div class="my-header-btn">
             <button class="layui-btn layui-btn-small btn-nav"><i class="layui-icon">&#xe65f;</i></button>
@@ -48,10 +60,10 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a class="name" href="javascript:;"><img src="./frame/static/image/code.png" alt="logo"> Admin </a>
+                <a class="name" href="javascript:;"><img src="<%=basePath%>frame/static/image/code.png" alt="logo"> Admin </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
+                    <dd><a href="javascript:;" href-url="<%=basePath%>html/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>
+                    <dd><a href="javascript:;" href-url="<%=basePath%>html/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
                     <dd><a href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
                 </dl>
             </li>
@@ -102,7 +114,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe id="iframe" src="demo/welcome.html" frameborder="0"></iframe>
+                    <iframe id="iframe" src="<%=basePath%>html/welcome.html" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
@@ -116,8 +128,8 @@
 
 <!-- pay -->
 <div class="my-pay-box none">
-    <div><img src="./frame/static/image/zfb.png" alt="支付宝"><p>支付宝</p></div>
-    <div><img src="./frame/static/image/wx.png" alt="微信"><p>微信</p></div>
+    <div><img src="<%=basePath%>frame/static/image/zfb.png" alt="支付宝"><p>支付宝</p></div>
+    <div><img src="<%=basePath%>frame/static/image/wx.png" alt="微信"><p>微信</p></div>
 </div>
 
 <!-- 右键菜单 -->
@@ -135,8 +147,8 @@
     </table>
 </div>
 
-<script type="text/javascript" src="frame/layui/layui.js"></script>
-<script type="text/javascript" src="./frame/static/js/vip_comm.js"></script>
+<script type="text/javascript" src="<%=basePath%>frame/layui/layui.js"></script>
+<script type="text/javascript" src="<%=basePath%>frame/static/js/vip_comm.js"></script>
 <script type="text/javascript">
 layui.use(['layer','vip_nav'], function () {
 
@@ -146,9 +158,9 @@ layui.use(['layer','vip_nav'], function () {
         ,$          = layui.jquery;
 
     // 顶部左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-    vipNav.top_left('./json/nav_top_left.json','side-top-left',false);
+    vipNav.top_left('<%=basePath%>/json/nav_top_left.json','side-top-left',false);
     // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-    vipNav.main('./json/nav_main.json','side-main',true);
+    vipNav.main('<%=basePath%>/json/nav_main.json','side-main',true);
 
     // you code ...
 

@@ -1,5 +1,9 @@
 package com.luning.graduation.model.bo;
 
+/**
+ * @author ln
+ * 测试用的BO对象
+ */
 public class TestBo {
     private Integer id;
 

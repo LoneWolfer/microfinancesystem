@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author ln
+ * 用于测试的service层实现类
+ */
 @Service
-public class TsetServiceImpl implements TestService {
+public class TestServiceImpl implements TestService {
 
     @Autowired
     private TestDao testDao;

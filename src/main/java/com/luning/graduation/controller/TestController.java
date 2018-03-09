@@ -10,6 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author ln
+ * 用于测试的控制器
+ */
 @Controller
 public class TestController {
 
@@ -22,5 +26,10 @@ public class TestController {
         ModelAndView modelAndView = new ModelAndView("test");
         modelAndView.addObject("testBoList",testBoList);
         return modelAndView;
+    }
+
+    @RequestMapping("/admin")
+    public String admin(){
+        return "admin/admin";
     }
 }
