@@ -11,6 +11,7 @@ import java.util.List;
 public interface TestService {
     /**
      * 测试方法，查询测试表中所有数据
+     *
      * @return list
      */
     List<TestBo> test();

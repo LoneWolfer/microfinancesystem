@@ -21,15 +21,15 @@ public class TestController {
     private TestService testService;
 
     @RequestMapping("/test")
-    public ModelAndView test(){
+    public ModelAndView test() {
         List<TestBo> testBoList = new ArrayList<>(testService.test());
         ModelAndView modelAndView = new ModelAndView("test");
-        modelAndView.addObject("testBoList",testBoList);
+        modelAndView.addObject("testBoList", testBoList);
         return modelAndView;
     }
 
     @RequestMapping("/admin")
-    public String admin(){
+    public String admin() {
         return "admin/admin";
     }
 }
