@@ -1,6 +1,6 @@
 package com.luning.graduation.dao;
 
-import com.luning.graduation.model.bo.TestBo;
+import com.luning.graduation.pojo.bo.TestBo;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.luning.graduation.controller;
 
-import com.luning.graduation.model.bo.TestBo;
+import com.luning.graduation.pojo.bo.TestBo;
 import com.luning.graduation.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

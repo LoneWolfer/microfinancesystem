@@ -1,4 +1,4 @@
-package com.luning.graduation.model.bo;
+package com.luning.graduation.pojo.bo;
 
 /**
  * @author ln

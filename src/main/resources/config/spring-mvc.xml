@@ -23,19 +23,13 @@
 
     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
     <mvc:default-servlet-handler/>
-    <!-- 静态资源映射,配置了<mvc:annotation-driven /> 才会起作用-->
-    <mvc:resources mapping="/static/css/**" location="/WEB-INF/static/css/"/>
-    <mvc:resources mapping="/static/images/**" location="/WEB-INF/static/images/"/>
-    <mvc:resources mapping="/static/data/**" location="/WEB-INF/static/data/"/>
-    <mvc:resources mapping="/static/download/**" location="/WEB-INF/static/download/"/>
-    <mvc:resources mapping="/static/fonts/**" location="/WEB-INF/static/fonts/"/>
-    <mvc:resources mapping="/static/lib/**" location="/WEB-INF/static/lib/"/>
-    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
-    <mvc:resources mapping="/frame/**" location="/WEB-INF/frame/"/>
+    <!-- 静态资源映射,配置了<mvc:annotation-driven /> 才会起作用,单元测试时需注释掉-->
+    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>-->
+    <!--<mvc:resources mapping="/frame/**" location="/WEB-INF/frame/"/>-->
     <!--弹窗所在目录，请勿删除-->
-    <mvc:resources mapping="/html/**" location="/WEB-INF/html/"/>
+    <!--<mvc:resources mapping="/html/**" location="/WEB-INF/html/"/>-->
     <!--暂时放着用来测静态数据,之后删除或者注释这行-->
-    <mvc:resources mapping="/json/**" location="/WEB-INF/json/"/>
+    <!--<mvc:resources mapping="/json/**" location="/WEB-INF/json/"/>-->
 
     <!-- 配置jsp 显示ViewResolver -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

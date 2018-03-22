@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <contextName>logback</contextName>
+
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出:%d:表示日期,%thread:表示线程名,%-5level:级别从左显示5个字符宽度,%msg:日志消息,%n:是换行符-->
+            <pattern>
+                %red(%d{yyyy-MM-dd HH:mm:ss})-%green([%thread])-%highlight(%-5level)-%boldMagenta(%logger)-%cyan(%msg%n)
+            </pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
+
+    <!-- 日志输出级别 -->
     <root level="debug">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="console"/>
     </root>
 </configuration>
