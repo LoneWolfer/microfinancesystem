@@ -3,12 +3,11 @@
   User: ln
   Date: 2018/3/9 0008
   Time: 09:06
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,10 +59,13 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a class="name" href="javascript:;"><img src="<%=basePath%>frame/static/image/code.png" alt="logo"> Admin </a>
+                <a class="name" href="javascript:;"><img src="<%=basePath%>frame/static/image/code.png" alt="logo">
+                    Admin </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" href-url="<%=basePath%>html/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>
-                    <dd><a href="javascript:;" href-url="<%=basePath%>html/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
+                    <dd><a href="javascript:;" href-url="<%=basePath%>html/login.html"><i
+                            class="layui-icon">&#xe621;</i>登录页</a></dd>
+                    <dd><a href="javascript:;" href-url="<%=basePath%>html/map.html"><i class="layui-icon">&#xe621;</i>图表</a>
+                    </dd>
                     <dd><a href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
                 </dl>
             </li>
@@ -121,15 +123,18 @@
     </div>
     <!-- footer -->
     <div class="layui-footer my-footer">
-        <p><a href="http://vip-admin.com" target="_blank">vip-admin后台模板v1.8.0</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a href="http://vip-admin.com/index/gather/index.html" target="_blank">vip-admin管理系统v1.2.0</a></p>
+        <p><a href="http://vip-admin.com" target="_blank">vip-admin后台模板v1.8.0</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a
+                href="http://vip-admin.com/index/gather/index.html" target="_blank">vip-admin管理系统v1.2.0</a></p>
         <p>2017 © copyright 蜀ICP备17005881号</p>
     </div>
 </div>
 
 <!-- pay -->
 <div class="my-pay-box none">
-    <div><img src="<%=basePath%>frame/static/image/zfb.png" alt="支付宝"><p>支付宝</p></div>
-    <div><img src="<%=basePath%>frame/static/image/wx.png" alt="微信"><p>微信</p></div>
+    <div><img src="<%=basePath%>frame/static/image/zfb.png" alt="支付宝">
+        <p>支付宝</p></div>
+    <div><img src="<%=basePath%>frame/static/image/wx.png" alt="微信">
+        <p>微信</p></div>
 </div>
 
 <!-- 右键菜单 -->
@@ -150,22 +155,22 @@
 <script type="text/javascript" src="<%=basePath%>frame/layui/layui.js"></script>
 <script type="text/javascript" src="<%=basePath%>frame/static/js/vip_comm.js"></script>
 <script type="text/javascript">
-layui.use(['layer','vip_nav'], function () {
+    layui.use(['layer', 'vip_nav'], function () {
 
-    // 操作对象
-    var layer       = layui.layer
-        ,vipNav     = layui.vip_nav
-        ,$          = layui.jquery;
+        // 操作对象
+        var layer = layui.layer
+            , vipNav = layui.vip_nav
+            , $ = layui.jquery;
 
-    // 顶部左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-    vipNav.top_left('<%=basePath%>/json/nav_top_left.json','side-top-left',false);
-    // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-    vipNav.main('<%=basePath%>/json/nav_main.json','side-main',true);
+        // 顶部左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]
+        vipNav.top_left('<%=basePath%>/json/nav_top_left.json', 'side-top-left', false);
+        // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
+        vipNav.main('<%=basePath%>/json/nav_main.json', 'side-main', true);
 
-    // you code ...
+        // you code ...
 
 
-});
+    });
 </script>
 </body>
 </html>
