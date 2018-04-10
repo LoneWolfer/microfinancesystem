@@ -1,6 +1,6 @@
 
-import com.luning.graduation.pojo.bo.TestBo;
-import com.luning.graduation.service.TestService;
+import com.luning.graduation.entity.SystemUserBo;
+import com.luning.graduation.service.SystemUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional
 public class BaseJunit4Test {
     @Autowired
-    private TestService testService;
+    private SystemUserService systemUserService;
 
     private final static Logger logger = LoggerFactory.getLogger(BaseJunit4Test.class);
 
@@ -25,9 +25,9 @@ public class BaseJunit4Test {
     public void testJunit() {
         System.out.println("---测试Spring整合Junit4进行单元测试---");
 
-        List<TestBo> testBoList = testService.test();
+        List<SystemUserBo> testBoList = systemUserService.listSystemUser();
         testBoList.forEach(testBo -> {
-            System.out.println("编号:" + testBo.getId() + "--" + "姓名:" + testBo.getName());
+            System.out.println("编号:" + testBo.getId() + "--" + "账号:" + testBo.getUserName());
         });
 
         System.out.println("---测试结束---");

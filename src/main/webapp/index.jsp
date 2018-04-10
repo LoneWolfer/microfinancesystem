@@ -1,5 +1,6 @@
 <html>
-<body>
-<h2>Hello World!</h2>
-</body>
+<head>
+    <%--跳转到登录页面--%>
+    <meta http-equiv="refresh" content="0;URL=login">
+</head>
 </html>

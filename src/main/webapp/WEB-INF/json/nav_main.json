@@ -1,91 +1,110 @@
 {
   "data": [
     {
-      "text": "LAYUI基础",
-      "icon": "&#xe620;",
+      "text": "业务管理",
+      "icon": "&#xe63c;",
       "subset": [
         {
-          "text": "按钮",
+          "text": "贷款申请",
           "icon": "&#xe621;",
-          "href": "html/btn.html"
-        },{
-          "text": "表单",
+          "href": "/application"
+        },
+        {
+          "text": "待办业务",
           "icon": "&#xe621;",
-          "href": "html/form.html"
-        },{
-          "text": "表格",
+          "href": "/schedule"
+        },
+        {
+          "text": "已办业务",
           "icon": "&#xe621;",
-          "href": "html/table.html"
-        },{
-          "text": "选项卡",
-          "icon": "&#xe621;",
-          "href": "html/tab-card.html"
-        },{
-          "text": "进度条",
-          "icon": "&#xe621;",
-          "href": "html/progress-bar.html"
-        },{
-          "text": "折叠面板",
-          "icon": "&#xe621;",
-          "href": "html/folding-panel.html"
-        },{
-          "text": "辅助元素",
-          "icon": "&#xe621;",
-          "href": "html/auxiliar.html"
-        },{
-          "text": "更多示例",
-          "icon": "&#xe621;",
-          "target": true,
-          "href": "http://www.layui.com/demo/"
+          "href": "/done"
         }
       ]
-    },{
-      "text": "扩展",
+    },
+    {
+      "text": "贷后管理",
       "icon": "&#xe628;",
       "href": "",
       "subset": [
         {
-          "text": "登录页",
+          "text": "贷款催收",
           "icon": "&#xe621;",
-          "href": "html/login.html"
-        },{
-          "text": "登录页2",
+          "href": "/urge"
+        },
+        {
+          "text": "违约处理",
           "icon": "&#xe621;",
-          "href": "html/login2.html"
-        },{
-          "text": "注册页",
-          "icon": "&#xe621;",
-          "href": "html/register.html"
-        },{
-          "text": "图表",
-          "icon": "&#xe621;",
-          "href": "html/map.html"
-        },{
-          "text": "添加-修改",
-          "icon": "&#xe621;",
-          "href": "html/add-edit.html"
-        },{
-          "text": "data-table 表格",
-          "icon": "&#xe621;",
-          "href": "html/data-table.html"
-        },{
-          "text": "tree-table 树表格",
-          "icon": "&#xe621;",
-          "href": "html/tree-table.html"
-        },{
-          "text": "404页",
-          "icon": "&#xe621;",
-          "href": "html/404.html"
-        },{
-          "text": "提示页",
-          "icon": "&#xe621;",
-          "href": "html/tips.html"
+          "href": "/break"
         }
       ]
-    },{
-      "text": "子窗口操作",
-      "icon": "&#xe638;",
-      "href": "html/children.html"
+    },
+    {
+      "text": "利率管理",
+      "icon": "&#xe65e;",
+      "href": "",
+      "subset": [
+        {
+          "text": "利率调整",
+          "icon": "&#xe621;",
+          "href": "/rate"
+        }
+      ]
+    },
+    {
+      "text": "查询分析",
+      "icon": "&#xe629;",
+      "href": "",
+      "subset": [
+        {
+          "text": "贷款查询",
+          "icon": "&#xe621;",
+          "href": "/search"
+        },
+        {
+          "text": "统计分析",
+          "icon": "&#xe621;",
+          "href": "/analyse"
+        }
+      ]
+    },
+    {
+      "text": "客户管理",
+      "icon": "&#xe612;",
+      "href": "",
+      "subset": [
+        {
+          "text": "客户管理",
+          "icon": "&#xe621;",
+          "href": "/customer"
+        },
+        {
+          "text": "黑名单管理",
+          "icon": "&#xe621;",
+          "href": "/blacklist"
+        }
+      ]
+    },
+    {
+      "text": "系统管理",
+      "icon": "&#xe620;",
+      "href": "",
+      "subset": [
+        {
+          "text": "账号管理",
+          "icon": "&#xe621;",
+          "href": "/account"
+        },
+        {
+          "text": "用户管理",
+          "icon": "&#xe621;",
+          "href": "/user"
+        },
+        {
+          "text": "权限管理",
+          "icon": "&#xe621;",
+          "href": "/authority"
+        }
+      ]
     }
   ]
 }
