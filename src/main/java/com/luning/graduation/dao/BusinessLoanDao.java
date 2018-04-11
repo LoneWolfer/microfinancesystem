@@ -1,8 +1,10 @@
 package com.luning.graduation.dao;
 
 import com.luning.graduation.entity.BusinessLoanBo;
+import com.luning.graduation.entity.CountApplyBo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ln
@@ -84,4 +86,19 @@ public interface BusinessLoanDao {
      * @return list
      */
     List<BusinessLoanBo> listDone();
+
+    /**
+     * 根据条件查询查询
+     *
+     * @param searchMap 查询条件
+     * @return list
+     */
+    List<BusinessLoanBo> listSearch(Map<String, Object> searchMap);
+
+    /**
+     * 按日统计贷款申请
+     *
+     * @return list
+     */
+    List<CountApplyBo> countByDay();
 }

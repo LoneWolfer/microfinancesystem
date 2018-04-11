@@ -71,12 +71,6 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">芝麻信用分</label>
-        <div class="layui-input-inline">
-            <input type="text" id="credit" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
         <label class="layui-form-label">银行卡号</label>
         <div class="layui-input-inline">
             <input type="text" id="bankCard" autocomplete="off" class="layui-input">
@@ -149,12 +143,6 @@
         <label class="layui-form-label">地址</label>
         <div class="layui-input-inline">
             <input type="text" id="addressAdd" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">芝麻信用分</label>
-        <div class="layui-input-inline">
-            <input type="text" id="creditAdd" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -238,7 +226,7 @@
             cols: [[
                 {field: 'id', title: 'ID', width: 70, sort: true},
                 {field: 'customerName', title: '客户姓名', width: 100},
-                {field: 'customerSex', title: '性别', width: 70, templet:'#sex'},
+                {field: 'customerSex', title: '性别', width: 70, templet: '#sex'},
                 {field: 'customerIdcard', title: '身份证号', width: 150},
                 {field: 'customerEmail', title: '邮箱', width: 150},
                 {field: 'customerPhone', title: '手机号', width: 150},
@@ -284,7 +272,6 @@
                 $("#email").val(data.customerEmail);
                 $("#phone").val(data.customerPhone);
                 $("#address").val(data.customerAddress);
-                $("#credit").val(data.customerCredit);
                 $("#bankCard").val(data.customerCreditcard);
                 $("#salary").val(data.customerSalary);
                 $("#company").val(data.customerCompany);
@@ -308,7 +295,6 @@
                         customerEmail: $("#email").val(),
                         customerPhone: $("#phone").val(),
                         customerAddress: $("#address").val(),
-                        customerCredit: $("#credit").val(),
                         customerCreditcard: $("#bankCard").val(),
                         customerSalary: $("#salary").val(),
                         customerCompany: $("#company").val(),
@@ -329,7 +315,6 @@
                                     customerEmail: businessCustomerBo.customerEmail,
                                     customerPhone: businessCustomerBo.customerPhone,
                                     customerAddress: businessCustomerBo.customerAddress,
-                                    customerCredit: businessCustomerBo.customerCredit,
                                     customerCreditcard: businessCustomerBo.customerCreditcard,
                                     customerSalary: businessCustomerBo.customerSalary,
                                     customerCompany: businessCustomerBo.customerCompany,
@@ -360,6 +345,10 @@
             });
             form.render();
             form.on('submit(insert)', function () {
+                var maxNum = 800;
+                var minNum = 650;
+                var length = maxNum - minNum + 1;
+                var credit = parseInt(Math.random() * length) + minNum;
                 var businessCustomerBo = {
                     customerName: $("#nameAdd").val(),
                     customerSex: $("#customerSexAdd").val(),
@@ -367,7 +356,7 @@
                     customerEmail: $("#emailAdd").val(),
                     customerPhone: $("#phoneAdd").val(),
                     customerAddress: $("#addressAdd").val(),
-                    customerCredit: $("#creditAdd").val(),
+                    customerCredit: credit,
                     customerCreditcard: $("#bankCardAdd").val(),
                     customerSalary: $("#salaryAdd").val(),
                     customerCompany: $("#companyAdd").val(),
@@ -401,8 +390,8 @@
                 // page: {
                 //     curr: 1 //重新从第 1 页开始
                 // },
-                where:{
-                    key:name
+                where: {
+                    key: name
                 }
             });
         })

@@ -7,7 +7,7 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="loan_type" jdbcType="SMALLINT" property="loanType" />
     <result column="loan_state" jdbcType="SMALLINT" property="loanState" />
-    <result column="loan_sum" jdbcType="VARCHAR" property="loanSum" />
+    <result column="loan_sum" jdbcType="BIGINT" property="loanSum" />
     <result column="loan_rate" jdbcType="DECIMAL" property="loanRate" />
     <result column="loan_repayment" jdbcType="SMALLINT" property="loanRepayment" />
     <result column="loan_date" jdbcType="TIMESTAMP" property="loanDate" />
@@ -155,6 +155,16 @@
   <select id="countLoan" resultType="java.lang.Integer">
     select count(*) from business_loan
   </select>
+  <select id="listSearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from business_loan
+    where 1=1
+    <if test="customerId != null">and customer_id = #{customerId}</if>
+    <if test="loanDate != null">and date(loan_date) = #{loanDate}</if>
+    <if test="loanType != null">and loan_type = #{loanType}</if>
+    <if test="loanState != null">and loan_state = #{loanState}</if>
+  </select>
   <select id="listSchedule" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -176,5 +186,15 @@
       <include refid="Base_Column_List" />
       from business_loan
       where loan_state != 0
+  </select>
+  <select id="countByDay" resultType="com.luning.graduation.entity.CountApplyBo">
+    select
+    date_format(loan_date,'%Y-%m-%d') applyDate,
+    count(id) applySum,
+    count(if(loan_state = 1,true,null)) applyPassed,
+    sum(loan_sum) applyProvide,
+    sum(if(loan_state = 1,true,loan_sum)) applyAmount
+    from business_loan
+    group by applyDate
   </select>
 </mapper>

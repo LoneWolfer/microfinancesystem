@@ -10,6 +10,7 @@ import com.luning.graduation.entity.BusinessRateBo;
 import com.luning.graduation.service.BusinessCustomerService;
 import com.luning.graduation.service.BusinessLoanService;
 import com.luning.graduation.service.BusinessRateService;
+import com.luning.graduation.util.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -73,17 +76,68 @@ public class BusinessController extends BaseController {
         BusinessCustomerBo businessCustomerBo = businessCustomerService.getCustomer(businessLoanBo.getCustomerId());
         Integer credit = businessCustomerBo.getCustomerCredit();
         List<BusinessRateBo> businessRateBoList = businessRateService.listRate();
+        final Long[] limit = {null};
         businessRateBoList.forEach((BusinessRateBo businessRateBo) -> {
             String[] arr = businessRateBo.getCreditRange().split(",");
             if (credit >= Integer.parseInt(arr[0]) && credit <= Integer.parseInt(arr[1])) {
                 businessLoanBo.setLoanRate(businessRateBo.getLoanRate());
+                limit[0] = businessRateBo.getLoanLimit();
             }
         });
-        if (businessLoanService.insertLoan(businessLoanBo) == 1) {
-            return "success";
+        if (businessLoanBo.getLoanSum() > limit[0]) {
+            return "overLimit";
         } else {
-            return "error";
+            if (businessLoanService.insertLoan(businessLoanBo) == 1) {
+                return "success";
+            } else {
+                return "error";
+            }
         }
+    }
+
+    @RequestMapping("/application/search")
+    public void searchApplication(HttpServletRequest request,
+                                  HttpServletResponse response,
+                                  @RequestParam(value = "name", required = false) String name,
+                                  @RequestParam(value = "date", required = false) String date,
+                                  @RequestParam(value = "type", required = false) String type,
+                                  @RequestParam(value = "state", required = false) String state) throws Exception {
+        logger.info("[BusinessController]req. " + request);
+        Map<String, Object> businessMap = new HashMap<>(4);
+        try {
+            List<BusinessLoanBo> businessLoanBoList;
+            if (!CommonUtil.isEmpty(name) || !CommonUtil.isEmpty(date)
+                    || !CommonUtil.isEmpty(type) || !CommonUtil.isEmpty(state)) {
+                Map<String, Object> searchMap = new HashMap<>(4);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                if (!CommonUtil.isEmpty(date)) {
+                    Date d = dateFormat.parse(date);
+                    searchMap.put("loanDate", d);
+                }
+                if (!CommonUtil.isEmpty(name)) {
+                    Long id = businessCustomerService.getByName(name).getId();
+                    searchMap.put("customerId", id);
+                }
+                if (!CommonUtil.isEmpty(type)) {
+                    searchMap.put("loanType", Integer.valueOf(type));
+                }
+                if (!CommonUtil.isEmpty(state)) {
+                    searchMap.put("loanState", Integer.valueOf(state));
+                }
+                businessLoanBoList = businessLoanService.listSearch(searchMap);
+            } else {
+                businessLoanBoList = businessLoanService.listLoan();
+            }
+            int count = businessLoanBoList.size();
+            //封装数据接口
+            businessMap.put("code", 0);
+            businessMap.put("msg", "");
+            businessMap.put("count", count);
+            businessMap.put("data", businessLoanBoList);
+        } catch (Exception e) {
+            logger.error("[BusinessController] get id:", e);
+        }
+        write(response, JSON.toJSONString(businessMap));
     }
 
     @RequestMapping("/schedule/list")

@@ -10,6 +10,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>这只是一个欢迎页</h1>
+<br>
+<h1 style="text-align: center;color: #00C0F7">欢迎使用基于芝麻信用的小额借贷管理系统</h1>
 </body>
 </html>

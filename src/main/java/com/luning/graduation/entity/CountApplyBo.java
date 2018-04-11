@@ -17,6 +17,8 @@ public class CountApplyBo {
 
     private Long applyProvide;
 
+    private Date applyDate;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class CountApplyBo {
 
     public void setApplyProvide(Long applyProvide) {
         this.applyProvide = applyProvide;
+    }
+
+    public Date getApplyDate() {
+        return applyDate;
+    }
+
+    public void setApplyDate(Date applyDate) {
+        this.applyDate = applyDate;
     }
 }

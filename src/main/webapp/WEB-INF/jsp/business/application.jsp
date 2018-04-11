@@ -197,10 +197,14 @@
                     url: '/business/application/insert',
                     data: businessLoanBo,
                     success: function (result) {
-                        if (result === 'success') {
+                        if (result === 'overLimit') {
+                            layer.msg("超出贷款额度!")
+                        }
+                        else if (result === 'success') {
                             layer.msg("插入成功!");
                             tableIns.reload();
-                        } else {
+                        }
+                        else {
                             layer.alert("插入失败!");
                         }
                     },

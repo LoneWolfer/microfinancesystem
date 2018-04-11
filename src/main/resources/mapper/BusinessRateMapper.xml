@@ -5,11 +5,12 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="loan_limit" jdbcType="BIGINT" property="loanLimit"/>
     <result column="credit_range" jdbcType="VARCHAR" property="creditRange" />
     <result column="loan_rate" jdbcType="DECIMAL" property="loanRate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, credit_range, loan_rate
+    id, gmt_create, gmt_modified, loan_limit, credit_range, loan_rate
   </sql>
   <select id="getRate" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -33,6 +34,9 @@
       <if test="gmtModified != null">
         gmt_modified,
       </if>
+      <if test="loanLimit != null">
+        loan_limit,
+      </if>
       <if test="creditRange != null">
         credit_range,
       </if>
@@ -50,6 +54,9 @@
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
+      <if test="loanLimit != null">
+        #{loanLimit,jdbcType=BIGINT},
+      </if>
       <if test="creditRange != null">
         #{creditRange,jdbcType=VARCHAR},
       </if>
@@ -66,6 +73,9 @@
       </if>
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanLimit != null">
+        loan_limit = #{loanLimit,jdbcType=BIGINT},
       </if>
       <if test="creditRange != null">
         credit_range = #{creditRange,jdbcType=SMALLINT},

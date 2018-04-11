@@ -10,6 +10,8 @@ public class BusinessRateBo {
 
     private Date gmtModified;
 
+    private Long loanLimit;
+
     private String creditRange;
 
     private BigDecimal loanRate;
@@ -28,6 +30,14 @@ public class BusinessRateBo {
 
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
+    }
+
+    public Long getLoanLimit() {
+        return loanLimit;
+    }
+
+    public void setLoanLimit(Long loanLimit) {
+        this.loanLimit = loanLimit;
     }
 
     public Date getGmtModified() {

@@ -14,7 +14,7 @@ public class BusinessLoanBo {
 
     private Short loanState;
 
-    private String loanSum;
+    private Long loanSum;
 
     private BigDecimal loanRate;
 
@@ -76,12 +76,12 @@ public class BusinessLoanBo {
         this.loanState = loanState;
     }
 
-    public String getLoanSum() {
+    public Long getLoanSum() {
         return loanSum;
     }
 
-    public void setLoanSum(String loanSum) {
-        this.loanSum = loanSum == null ? null : loanSum.trim();
+    public void setLoanSum(Long loanSum) {
+        this.loanSum = loanSum;
     }
 
     public BigDecimal getLoanRate() {

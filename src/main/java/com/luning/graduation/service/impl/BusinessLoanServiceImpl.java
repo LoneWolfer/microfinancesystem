@@ -7,12 +7,15 @@ import com.luning.graduation.dao.BusinessLoanDao;
 import com.luning.graduation.dao.SystemUserDao;
 import com.luning.graduation.entity.BusinessCustomerBo;
 import com.luning.graduation.entity.BusinessLoanBo;
+import com.luning.graduation.entity.CountApplyBo;
 import com.luning.graduation.entity.SystemUserBo;
 import com.luning.graduation.service.BusinessLoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ln
@@ -95,6 +98,18 @@ public class BusinessLoanServiceImpl implements BusinessLoanService {
         List<BusinessLoanBo> businessLoanBoList = businessLoanDao.listDone();
         packLoanBo(businessLoanBoList);
         return businessLoanBoList;
+    }
+
+    @Override
+    public List<BusinessLoanBo> listSearch(Map<String, Object> searchMap) {
+        List<BusinessLoanBo> businessLoanBoList = businessLoanDao.listSearch(searchMap);
+        packLoanBo(businessLoanBoList);
+        return businessLoanBoList;
+    }
+
+    @Override
+    public List<CountApplyBo> countByDay() {
+        return businessLoanDao.countByDay();
     }
 
     private void packLoanBo(List<BusinessLoanBo> businessLoanBoList) {

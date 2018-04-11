@@ -34,11 +34,17 @@
 
 <form id="modify" hidden="hidden">
     <br>
+    <input type="text" id="id" hidden="hidden">
     <div class="layui-form-item">
-        <input type="text" id="id" hidden="hidden">
         <label class="layui-form-label">利率</label>
         <div class="layui-input-inline">
             <input type="text" id="loanRate" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">额度</label>
+        <div class="layui-input-inline">
+            <input type="text" id="loanLimit" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -66,6 +72,12 @@
         <label class="layui-form-label">利率</label>
         <div class="layui-input-inline">
             <input type="text" id="loanRateAdd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">额度</label>
+        <div class="layui-input-inline">
+            <input type="text" id="loanLimitAdd" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -121,8 +133,9 @@
             url: '/rate/rate/list',
             page: true,
             cols: [[
-                {field: 'id', title: 'ID', sort: true, width: 200},
-                {field: 'loanRate', title: '贷款利率%', width: 200},
+                {field: 'id', title: 'ID', sort: true, width: 100},
+                {field: 'loanRate', title: '贷款利率%', width: 150},
+                {field: 'loanLimit', title: '贷款额度', width: 150},
                 {field: 'creditRange', title: '芝麻信用分范围', width: 200},
                 {field: 'gmtCreate', title: '创建时间', width: 250, sort: true, templet: '#createTime'},
                 {field: 'gmtModified', title: '修改时间', width: 250, sort: true, templet: '#modifyTime '},
@@ -157,6 +170,7 @@
                 var arr = str.split(",");
                 $("#id").val(data.id);
                 $("#loanRate").val(data.loanRate);
+                $("#loanLimit").val(data.loanLimit);
                 $("#min").val(arr[0]);
                 $("#max").val(arr[1]);
                 layer.open({
@@ -175,6 +189,7 @@
                     var businessRateBo = {
                         id: parseInt($("#id").val()),
                         loanRate: $("#loanRate").val(),
+                        loanLimit: $("#loanLimit").val(),
                         creditRange: creditRange
                     };
                     $.ajax({
@@ -186,6 +201,7 @@
                                 layer.msg("更新成功!");
                                 obj.update({
                                     loanRate: businessRateBo.loanRate,
+                                    loanLimit: businessRateBo.loanLimit,
                                     creditRange: businessRateBo.creditRange
                                 })
                             } else {
@@ -217,6 +233,7 @@
                 var creditRange = min + "," + max;
                 var businessRateBo = {
                     loanRate: $("#loanRateAdd").val(),
+                    loanLimit: $("#loanLimitAdd").val(),
                     creditRange: creditRange
                 };
                 $.ajax({
@@ -249,7 +266,10 @@
                     data.forEach(function (value) {
                         var arr = value.creditRange.split(",");
                         if (credit >= parseInt(arr[0]) && credit <= parseInt(arr[1])) {
-                            layer.alert("该芝麻信用分对应的利率为 <span style='color: #64b3f4;'>" + value.loanRate + "</span>");
+                            layer.alert("该芝麻信用分对应的利率为 <span style='color: #64b3f4;'>"
+                                + value.loanRate + "</span><br>"
+                                + "贷款额度为 <span style='color: #64b3f4;'>"
+                                + value.loanLimit + "</span><br>");
                         }
                     });
                 }
