@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luning.graduation.dao.BusinessRebackDao">
+  <resultMap id="BaseResultMap" type="com.luning.graduation.entity.BusinessRebackBo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="loan_id" jdbcType="BIGINT" property="loanId" />
+    <result column="reback_date" jdbcType="TIMESTAMP" property="rebackDate" />
+    <result column="reback_amount" jdbcType="BIGINT" property="rebackAmount" />
+    <result column="surplus_amount" jdbcType="BIGINT" property="surplusAmount" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, loan_id, reback_date, reback_amount, surplus_amount, 
+    customer_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from graduation..business_reback
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from graduation..business_reback
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.luning.graduation.entity.BusinessRebackBo">
+    insert into graduation..business_reback (id, gmt_create, gmt_modified, 
+      loan_id, reback_date, reback_amount, 
+      surplus_amount, customer_id)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{loanId,jdbcType=BIGINT}, #{rebackDate,jdbcType=TIMESTAMP}, #{rebackAmount,jdbcType=BIGINT}, 
+      #{surplusAmount,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luning.graduation.entity.BusinessRebackBo">
+    insert into graduation..business_reback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="loanId != null">
+        loan_id,
+      </if>
+      <if test="rebackDate != null">
+        reback_date,
+      </if>
+      <if test="rebackAmount != null">
+        reback_amount,
+      </if>
+      <if test="surplusAmount != null">
+        surplus_amount,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanId != null">
+        #{loanId,jdbcType=BIGINT},
+      </if>
+      <if test="rebackDate != null">
+        #{rebackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rebackAmount != null">
+        #{rebackAmount,jdbcType=BIGINT},
+      </if>
+      <if test="surplusAmount != null">
+        #{surplusAmount,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luning.graduation.entity.BusinessRebackBo">
+    update graduation..business_reback
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanId != null">
+        loan_id = #{loanId,jdbcType=BIGINT},
+      </if>
+      <if test="rebackDate != null">
+        reback_date = #{rebackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rebackAmount != null">
+        reback_amount = #{rebackAmount,jdbcType=BIGINT},
+      </if>
+      <if test="surplusAmount != null">
+        surplus_amount = #{surplusAmount,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luning.graduation.entity.BusinessRebackBo">
+    update graduation..business_reback
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      loan_id = #{loanId,jdbcType=BIGINT},
+      reback_date = #{rebackDate,jdbcType=TIMESTAMP},
+      reback_amount = #{rebackAmount,jdbcType=BIGINT},
+      surplus_amount = #{surplusAmount,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

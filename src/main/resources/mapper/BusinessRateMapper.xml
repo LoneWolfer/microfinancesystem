@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luning.graduation.dao.BusinessRateDao">
+  <resultMap id="BaseResultMap" type="com.luning.graduation.entity.BusinessRateBo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="credit_range" jdbcType="VARCHAR" property="creditRange" />
+    <result column="loan_rate" jdbcType="DECIMAL" property="loanRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, credit_range, loan_rate
+  </sql>
+  <select id="getRate" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_rate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteRate" parameterType="java.lang.Long">
+    delete from business_rate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertRate" parameterType="com.luning.graduation.entity.BusinessRateBo">
+    insert into business_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="creditRange != null">
+        credit_range,
+      </if>
+      <if test="loanRate != null">
+        loan_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditRange != null">
+        #{creditRange,jdbcType=VARCHAR},
+      </if>
+      <if test="loanRate != null">
+        #{loanRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateRate" parameterType="com.luning.graduation.entity.BusinessRateBo">
+    update business_rate
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditRange != null">
+        credit_range = #{creditRange,jdbcType=SMALLINT},
+      </if>
+      <if test="loanRate != null">
+        loan_rate = #{loanRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listRate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from business_rate
+  </select>
+  <select id="countRate" resultType="java.lang.Integer">
+    select count(*) from business_rate
+  </select>
+</mapper>

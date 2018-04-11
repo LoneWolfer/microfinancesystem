@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luning.graduation.dao.BusinessProvideDao">
+  <resultMap id="BaseResultMap" type="com.luning.graduation.entity.BusinessProvideBo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="loan_id" jdbcType="BIGINT" property="loanId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="provide_sum" jdbcType="VARCHAR" property="provideSum" />
+    <result column="provide_date" jdbcType="TIMESTAMP" property="provideDate" />
+    <result column="provide_last" jdbcType="TIMESTAMP" property="provideLast" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, loan_id, user_id, provide_sum, provide_date, provide_last
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from graduation..business_provide
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from graduation..business_provide
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.luning.graduation.entity.BusinessProvideBo">
+    insert into graduation..business_provide (id, gmt_create, gmt_modified, 
+      loan_id, user_id, provide_sum, 
+      provide_date, provide_last)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{loanId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{provideSum,jdbcType=VARCHAR}, 
+      #{provideDate,jdbcType=TIMESTAMP}, #{provideLast,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luning.graduation.entity.BusinessProvideBo">
+    insert into graduation..business_provide
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="loanId != null">
+        loan_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="provideSum != null">
+        provide_sum,
+      </if>
+      <if test="provideDate != null">
+        provide_date,
+      </if>
+      <if test="provideLast != null">
+        provide_last,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanId != null">
+        #{loanId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="provideSum != null">
+        #{provideSum,jdbcType=VARCHAR},
+      </if>
+      <if test="provideDate != null">
+        #{provideDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provideLast != null">
+        #{provideLast,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luning.graduation.entity.BusinessProvideBo">
+    update graduation..business_provide
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanId != null">
+        loan_id = #{loanId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="provideSum != null">
+        provide_sum = #{provideSum,jdbcType=VARCHAR},
+      </if>
+      <if test="provideDate != null">
+        provide_date = #{provideDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provideLast != null">
+        provide_last = #{provideLast,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luning.graduation.entity.BusinessProvideBo">
+    update graduation..business_provide
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      loan_id = #{loanId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      provide_sum = #{provideSum,jdbcType=VARCHAR},
+      provide_date = #{provideDate,jdbcType=TIMESTAMP},
+      provide_last = #{provideLast,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

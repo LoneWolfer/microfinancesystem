@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luning.graduation.dao.BusinessLoanDao">
+  <resultMap id="BaseResultMap" type="com.luning.graduation.entity.BusinessLoanBo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="loan_type" jdbcType="SMALLINT" property="loanType" />
+    <result column="loan_state" jdbcType="SMALLINT" property="loanState" />
+    <result column="loan_sum" jdbcType="VARCHAR" property="loanSum" />
+    <result column="loan_rate" jdbcType="DECIMAL" property="loanRate" />
+    <result column="loan_repayment" jdbcType="SMALLINT" property="loanRepayment" />
+    <result column="loan_date" jdbcType="TIMESTAMP" property="loanDate" />
+    <result column="loan_period" jdbcType="INTEGER" property="loanPeriod" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, loan_type, loan_state, loan_sum, loan_rate, loan_repayment, 
+    loan_date, loan_period, customer_id, user_id
+  </sql>
+  <select id="getLoan" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_loan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listLoan" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from business_loan
+  </select>
+  <insert id="insertLoan" parameterType="com.luning.graduation.entity.BusinessLoanBo">
+    insert into business_loan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="loanType != null">
+        loan_type,
+      </if>
+      <if test="loanState != null">
+        loan_state,
+      </if>
+      <if test="loanSum != null">
+        loan_sum,
+      </if>
+      <if test="loanRate != null">
+        loan_rate,
+      </if>
+      <if test="loanRepayment != null">
+        loan_repayment,
+      </if>
+      <if test="loanDate != null">
+        loan_date,
+      </if>
+      <if test="loanPeriod != null">
+        loan_period,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanType != null">
+        #{loanType,jdbcType=SMALLINT},
+      </if>
+      <if test="loanState != null">
+        #{loanState,jdbcType=SMALLINT},
+      </if>
+      <if test="loanSum != null">
+        #{loanSum,jdbcType=VARCHAR},
+      </if>
+      <if test="loanRate != null">
+        #{loanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loanRepayment != null">
+        #{loanRepayment,jdbcType=SMALLINT},
+      </if>
+      <if test="loanDate != null">
+        #{loanDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanPeriod != null">
+        #{loanPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteLoan" parameterType="java.lang.Long">
+    delete from business_loan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <update id="updateLoan" parameterType="com.luning.graduation.entity.BusinessLoanBo">
+    update business_loan
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanType != null">
+        loan_type = #{loanType,jdbcType=SMALLINT},
+      </if>
+      <if test="loanState != null">
+        loan_state = #{loanState,jdbcType=SMALLINT},
+      </if>
+      <if test="loanSum != null">
+        loan_sum = #{loanSum,jdbcType=VARCHAR},
+      </if>
+      <if test="loanRate != null">
+        loan_rate = #{loanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loanRepayment != null">
+        loan_repayment = #{loanRepayment,jdbcType=SMALLINT},
+      </if>
+      <if test="loanDate != null">
+        loan_date = #{loanDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanPeriod != null">
+        loan_period = #{loanPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="countLoan" resultType="java.lang.Integer">
+    select count(*) from business_loan
+  </select>
+  <select id="listSchedule" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from business_loan
+    where loan_state = 0
+  </select>
+  <update id="passSchedule" parameterType="java.lang.Long">
+      update business_loan
+      set loan_state = 1
+      where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="refuseSchedule" parameterType="java.lang.Long">
+      update business_loan
+      set loan_state = 2
+      where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listDone" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from business_loan
+      where loan_state != 0
+  </select>
+</mapper>

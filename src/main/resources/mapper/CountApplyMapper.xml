@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luning.graduation.dao.CountApplyDao">
+  <resultMap id="BaseResultMap" type="com.luning.graduation.entity.CountApplyBo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="apply_sum" jdbcType="INTEGER" property="applySum" />
+    <result column="apply_passed" jdbcType="INTEGER" property="applyPassed" />
+    <result column="apply_amount" jdbcType="BIGINT" property="applyAmount" />
+    <result column="apply_provide" jdbcType="BIGINT" property="applyProvide" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, apply_sum, apply_passed, apply_amount, apply_provide
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from graduation..count_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from graduation..count_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.luning.graduation.entity.CountApplyBo">
+    insert into graduation..count_apply (id, gmt_create, gmt_modified, 
+      apply_sum, apply_passed, apply_amount, 
+      apply_provide)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{applySum,jdbcType=INTEGER}, #{applyPassed,jdbcType=INTEGER}, #{applyAmount,jdbcType=BIGINT}, 
+      #{applyProvide,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luning.graduation.entity.CountApplyBo">
+    insert into graduation..count_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="applySum != null">
+        apply_sum,
+      </if>
+      <if test="applyPassed != null">
+        apply_passed,
+      </if>
+      <if test="applyAmount != null">
+        apply_amount,
+      </if>
+      <if test="applyProvide != null">
+        apply_provide,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applySum != null">
+        #{applySum,jdbcType=INTEGER},
+      </if>
+      <if test="applyPassed != null">
+        #{applyPassed,jdbcType=INTEGER},
+      </if>
+      <if test="applyAmount != null">
+        #{applyAmount,jdbcType=BIGINT},
+      </if>
+      <if test="applyProvide != null">
+        #{applyProvide,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luning.graduation.entity.CountApplyBo">
+    update graduation..count_apply
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applySum != null">
+        apply_sum = #{applySum,jdbcType=INTEGER},
+      </if>
+      <if test="applyPassed != null">
+        apply_passed = #{applyPassed,jdbcType=INTEGER},
+      </if>
+      <if test="applyAmount != null">
+        apply_amount = #{applyAmount,jdbcType=BIGINT},
+      </if>
+      <if test="applyProvide != null">
+        apply_provide = #{applyProvide,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luning.graduation.entity.CountApplyBo">
+    update graduation..count_apply
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      apply_sum = #{applySum,jdbcType=INTEGER},
+      apply_passed = #{applyPassed,jdbcType=INTEGER},
+      apply_amount = #{applyAmount,jdbcType=BIGINT},
+      apply_provide = #{applyProvide,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
