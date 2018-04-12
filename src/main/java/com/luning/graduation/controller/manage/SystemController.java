@@ -2,7 +2,9 @@ package com.luning.graduation.controller.manage;
 
 import com.alibaba.fastjson.JSON;
 import com.luning.graduation.controller.BaseController;
+import com.luning.graduation.entity.SystemMenuBo;
 import com.luning.graduation.entity.SystemUserBo;
+import com.luning.graduation.service.AuthorityService;
 import com.luning.graduation.service.SystemUserService;
 import com.luning.graduation.util.SessionKeyConst;
 import org.slf4j.Logger;
@@ -29,6 +31,8 @@ public class SystemController extends BaseController {
 
     @Autowired
     private SystemUserService systemUserService;
+    @Autowired
+    private AuthorityService authorityService;
 
     @RequestMapping("/user/list")
     public void listUser(HttpServletRequest request,
@@ -92,5 +96,20 @@ public class SystemController extends BaseController {
         } else {
             return "error";
         }
+    }
+
+    @RequestMapping("/auth/list")
+    public void listAuth(HttpServletRequest request,
+                         HttpServletResponse response,HttpSession session) throws Exception {
+        logger.info("[SystemController]req. " + request);
+        List<SystemMenuBo> systemMenuBoList = new ArrayList<>();
+        try {
+            SystemUserBo user = (SystemUserBo) session.getAttribute(SessionKeyConst.USER_INFO);
+            Long userId = user.getId();
+            systemMenuBoList = authorityService.listMenuByUserId(userId);
+        }catch (Exception e){
+            logger.error("[SystemController] get id:", e);
+        }
+        write(response,JSON.toJSONString(systemMenuBoList));
     }
 }

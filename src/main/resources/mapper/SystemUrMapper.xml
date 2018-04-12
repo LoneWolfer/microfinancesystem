@@ -11,24 +11,18 @@
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, user_id, role_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="getSystemUr" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from graduation..system_ur
-    where id = #{id,jdbcType=BIGINT}
+    from system_ur
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from graduation..system_ur
+  <delete id="deleteSystemUr" parameterType="java.lang.Long">
+    delete from system_ur
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.luning.graduation.entity.SystemUrBo">
-    insert into graduation..system_ur (id, gmt_create, gmt_modified, 
-      user_id, role_id)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.luning.graduation.entity.SystemUrBo">
-    insert into graduation..system_ur
+  <insert id="insertSystemUr" parameterType="com.luning.graduation.entity.SystemUrBo">
+    insert into system_ur
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -64,8 +58,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.luning.graduation.entity.SystemUrBo">
-    update graduation..system_ur
+  <update id="updateSystemUr" parameterType="com.luning.graduation.entity.SystemUrBo">
+    update system_ur
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -80,14 +74,6 @@
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.luning.graduation.entity.SystemUrBo">
-    update graduation..system_ur
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      user_id = #{userId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

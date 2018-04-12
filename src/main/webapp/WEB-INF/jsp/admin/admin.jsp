@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ln
@@ -120,7 +121,26 @@
         vipNav.main('<%=basePath%>json/nav_main.json', 'side-main', false);
 
         // you code ...
-
+        $.ajax({
+            type:'GET',
+            url:'/system/auth/list',
+            success:function (result) {
+                var arr = [];
+                result.forEach(function (value, index, array) {
+                    if (value.parentId === 0){
+                        arr.push({
+                            "text": value.menuName,
+                            "icon": value.menuIcon,
+                            "subset": []
+                        })
+                    }
+                });
+                var navData = {
+                    "data": arr
+                };
+                console.log(navData);
+            }
+        })
 
     });
 </script>

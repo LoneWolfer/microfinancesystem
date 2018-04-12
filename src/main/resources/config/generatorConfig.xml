@@ -47,48 +47,6 @@
         <!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等  -->
         <!--domainObjectName:注意类名命名规范-->
 
-        <table catalog="graduation" tableName="business_customer" domainObjectName="BusinessCustomerBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table catalog="graduation" tableName="business_loan" domainObjectName="BusinessLoanBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table catalog="graduation" tableName="business_provide" domainObjectName="BusinessProvideBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table catalog="graduation" tableName="business_rate" domainObjectName="BusinessRateBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table catalog="graduation" tableName="business_reback" domainObjectName="BusinessRebackBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table catalog="graduation" tableName="count_apply" domainObjectName="CountApplyBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table catalog="graduation" tableName="count_reback" domainObjectName="CountRebackBo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
         <table catalog="graduation" tableName="system_menu" domainObjectName="SystemMenuBo"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"

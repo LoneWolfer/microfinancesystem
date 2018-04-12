@@ -1,7 +1,10 @@
 
 import com.alibaba.fastjson.JSON;
+import com.luning.graduation.dao.SystemMenuDao;
 import com.luning.graduation.entity.CountApplyBo;
+import com.luning.graduation.entity.SystemMenuBo;
 import com.luning.graduation.entity.SystemUserBo;
+import com.luning.graduation.service.AuthorityService;
 import com.luning.graduation.service.BusinessLoanService;
 import com.luning.graduation.service.SystemUserService;
 import org.junit.Test;
@@ -23,6 +26,8 @@ public class BaseJunit4Test {
     private SystemUserService systemUserService;
     @Autowired
     private BusinessLoanService businessLoanService;
+    @Autowired
+    private AuthorityService authorityService;
 
     private final static Logger logger = LoggerFactory.getLogger(BaseJunit4Test.class);
 
@@ -44,6 +49,16 @@ public class BaseJunit4Test {
 
         List<CountApplyBo> countApplyBos = businessLoanService.countByDay();
         System.out.println(JSON.toJSONString(countApplyBos));
+
+        System.out.println("---测试结束---");
+    }
+
+    @Test
+    public void testAuth(){
+        System.out.println("---测试Spring整合Junit4进行单元测试---");
+
+        List<SystemMenuBo> systemMenuBoList = authorityService.listMenuByUserId(1L);
+        System.out.println(JSON.toJSONString(systemMenuBoList));
 
         System.out.println("---测试结束---");
     }

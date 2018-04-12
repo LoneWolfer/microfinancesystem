@@ -11,24 +11,19 @@
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, role_id, menu_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="listSystemMr" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from graduation..system_mr
-    where id = #{id,jdbcType=BIGINT}
+    from system_mr
+    where role_id = #{roleId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from graduation..system_mr
-    where id = #{id,jdbcType=BIGINT}
+  <delete id="deleteSystemMr" parameterType="com.luning.graduation.entity.SystemMrBo">
+    delete from system_mr
+    where role_id = #{roleId,jdbcType=BIGINT}
+    and menu_id = #{menuId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.luning.graduation.entity.SystemMrBo">
-    insert into graduation..system_mr (id, gmt_create, gmt_modified, 
-      role_id, menu_id)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{roleId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.luning.graduation.entity.SystemMrBo">
-    insert into graduation..system_mr
+  <insert id="insertSystemMr" parameterType="com.luning.graduation.entity.SystemMrBo">
+    insert into system_mr
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -64,8 +59,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.luning.graduation.entity.SystemMrBo">
-    update graduation..system_mr
+  <update id="updateSystemMr" parameterType="com.luning.graduation.entity.SystemMrBo">
+    update system_mr
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -80,14 +75,6 @@
         menu_id = #{menuId,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.luning.graduation.entity.SystemMrBo">
-    update graduation..system_mr
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      role_id = #{roleId,jdbcType=BIGINT},
-      menu_id = #{menuId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

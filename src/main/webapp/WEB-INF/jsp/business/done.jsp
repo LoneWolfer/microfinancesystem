@@ -81,7 +81,7 @@
                 {field: 'loanRate', title: '贷款利率', width: 100},
                 {field: 'repayName', title: '还款类型', width: 150},
                 {field: 'loanDate', title: '申请日期', width: 150, templet: "#loanDate"},
-                {field: 'loanPeriod', title: '申请期限(天)', width: 100},
+                {field: 'loanPeriod', title: '申请期限(月)', width: 115},
                 {field: 'customerName', title: '贷款人', width: 100},
                 {field: 'userName', title: '处理人', width: 100},
                 {field: 'gmtCreate', title: '创建时间', width: 150, sort: true, templet: '#createTime'},
