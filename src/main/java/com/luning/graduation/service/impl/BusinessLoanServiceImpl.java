@@ -4,16 +4,13 @@ import com.luning.graduation.LoanRepayEnum;
 import com.luning.graduation.LoanTypeEnum;
 import com.luning.graduation.dao.BusinessCustomerDao;
 import com.luning.graduation.dao.BusinessLoanDao;
+import com.luning.graduation.dao.BusinessMoneyDao;
 import com.luning.graduation.dao.SystemUserDao;
-import com.luning.graduation.entity.BusinessCustomerBo;
-import com.luning.graduation.entity.BusinessLoanBo;
-import com.luning.graduation.entity.CountApplyBo;
-import com.luning.graduation.entity.SystemUserBo;
+import com.luning.graduation.entity.*;
 import com.luning.graduation.service.BusinessLoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +27,8 @@ public class BusinessLoanServiceImpl implements BusinessLoanService {
     private SystemUserDao systemUserDao;
     @Autowired
     private BusinessCustomerDao businessCustomerDao;
+    @Autowired
+    private BusinessMoneyDao businessMoneyDao;
 
     @Override
     public BusinessLoanBo getLoan(Long id) {
@@ -84,13 +83,13 @@ public class BusinessLoanServiceImpl implements BusinessLoanService {
     }
 
     @Override
-    public int passSchedule(Long id) {
-        return businessLoanDao.passSchedule(id);
+    public int passSchedule(BusinessLoanBo businessLoanBo) {
+        return businessLoanDao.passSchedule(businessLoanBo);
     }
 
     @Override
-    public int refuseSchedule(Long id) {
-        return businessLoanDao.refuseSchedule(id);
+    public int refuseSchedule(BusinessLoanBo businessLoanBo) {
+        return businessLoanDao.refuseSchedule(businessLoanBo);
     }
 
     @Override
@@ -110,6 +109,23 @@ public class BusinessLoanServiceImpl implements BusinessLoanService {
     @Override
     public List<CountApplyBo> countByDay() {
         return businessLoanDao.countByDay();
+    }
+
+    @Override
+    public int updateMoney(Long loanSum) {
+        BusinessMoneyBo businessMoneyBo = businessMoneyDao.getMoney(1L);
+        Long money = businessMoneyBo.getMoney() - loanSum;
+        if (money > 0){
+            businessMoneyBo.setMoney(money);
+            return businessMoneyDao.updateMoney(businessMoneyBo);
+        }else {
+            return -1;
+        }
+    }
+
+    @Override
+    public BusinessMoneyBo getMoney(long l) {
+        return businessMoneyDao.getMoney(l);
     }
 
     private void packLoanBo(List<BusinessLoanBo> businessLoanBoList) {

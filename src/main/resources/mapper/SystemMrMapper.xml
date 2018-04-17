@@ -7,9 +7,10 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="menu_id" jdbcType="BIGINT" property="menuId" />
+    <result column="status" jdbcType="INTEGER" property="status"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, role_id, menu_id
+    id, gmt_create, gmt_modified, role_id, menu_id, status
   </sql>
   <select id="listSystemMr" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,7 +23,7 @@
     where role_id = #{roleId,jdbcType=BIGINT}
     and menu_id = #{menuId,jdbcType=BIGINT}
   </delete>
-  <insert id="insertSystemMr" parameterType="com.luning.graduation.entity.SystemMrBo">
+  <insert id="insertMr" parameterType="com.luning.graduation.entity.SystemMrBo">
     insert into system_mr
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,20 +62,13 @@
   </insert>
   <update id="updateSystemMr" parameterType="com.luning.graduation.entity.SystemMrBo">
     update system_mr
-    <set>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="menuId != null">
-        menu_id = #{menuId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
+    set status = 1
+    where role_id = #{roleId,jdbcType=BIGINT}
+    and menu_id = #{menuId,jdbcType=BIGINT}
+  </update>
+  <update id="clearMr" parameterType="java.lang.Long">
+    update system_mr
+    set status = 0
+    where role_id = #{roleId,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -107,6 +107,8 @@
                             if (result === 'success') {
                                 layer.msg("已经通过该申请!");
                                 tableIns.reload();
+                            } else if (result === 'LackOfMoney') {
+                                layer.msg("余额不足!");
                             } else {
                                 layer.msg("通过申请失败!");
                             }

@@ -42,6 +42,10 @@
     {{# } }}
 </script>
 
+<script type="text/html" id="credit">
+    <span style="color: #64b3f4;">{{ d.customerCredit }}</span>
+</script>
+
 <script type="text/html" id="createTime">
     {{# if(d.gmtCreate!=null) { }}
     {{ format(d.gmtCreate) }}
@@ -77,7 +81,7 @@
                 {field: 'customerEmail', title: '邮箱', width: 150},
                 {field: 'customerPhone', title: '手机号', width: 150},
                 {field: 'customerAddress', title: '地址', width: 150},
-                {field: 'customerCredit', title: '芝麻信用分', width: 100},
+                {field: 'customerCredit', title: '芝麻信用分', width: 100, templet: '#credit'},
                 {field: 'customerCreditcard', title: '银行卡号', width: 150},
                 {field: 'customerSalary', title: '月薪', width: 100},
                 {field: 'customerCompany', title: '公司', width: 150},

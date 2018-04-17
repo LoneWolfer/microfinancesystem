@@ -28,7 +28,8 @@
         <input class="layui-input" id="searchId" autocomplete="off">
     </div>
     <button id="search" class="layui-btn">搜索</button>
-    <button id="add" class="layui-btn">新增</button>
+    <button id="add" class="layui-btn">新增</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    余额：<span id="money" style="color: #64b3f4;"></span>
 </div>
 <table id="rate" lay-filter="rate"></table>
 
@@ -105,6 +106,10 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="delete">删除</a>
 </script>
 
+<script type="text/html" id="credit">
+    <span style="color: #64b3f4;">{{ d.creditRange }}</span>
+</script>
+
 <script type="text/html" id="createTime">
     {{# if(d.gmtCreate!=null) { }}
     {{ format(d.gmtCreate) }}
@@ -121,10 +126,23 @@
 <script src="<%=basePath%>js/format.js"></script>
 
 <script type="text/javascript">
+
     layui.use(['element', 'table', 'form'], function () {
         var table = layui.table,
             form = layui.form,
             $ = layui.jquery;
+
+        var sum = null;
+        $.ajax({
+            type:'POST',
+            url:'/business/money/get',
+            async:false,
+            success:function (result) {
+                sum = result.money;
+            }
+        });
+
+        $("#money").html(sum);
 
         var tableIns = table.render({
             id: 'rate',
@@ -136,7 +154,7 @@
                 {field: 'id', title: 'ID', sort: true, width: 100},
                 {field: 'loanRate', title: '贷款利率%', width: 150},
                 {field: 'loanLimit', title: '贷款额度', width: 150},
-                {field: 'creditRange', title: '芝麻信用分范围', width: 200},
+                {field: 'creditRange', title: '芝麻信用分范围', width: 200, templet:'#credit'},
                 {field: 'gmtCreate', title: '创建时间', width: 250, sort: true, templet: '#createTime'},
                 {field: 'gmtModified', title: '修改时间', width: 250, sort: true, templet: '#modifyTime '},
                 {fixed: 'right', width: 130, align: 'center', toolbar: '#rateBar'}

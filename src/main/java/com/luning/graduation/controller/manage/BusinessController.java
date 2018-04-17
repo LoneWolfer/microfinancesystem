@@ -4,13 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.luning.graduation.LoanRepayEnum;
 import com.luning.graduation.LoanTypeEnum;
 import com.luning.graduation.controller.BaseController;
-import com.luning.graduation.entity.BusinessCustomerBo;
-import com.luning.graduation.entity.BusinessLoanBo;
-import com.luning.graduation.entity.BusinessRateBo;
+import com.luning.graduation.entity.*;
 import com.luning.graduation.service.BusinessCustomerService;
 import com.luning.graduation.service.BusinessLoanService;
 import com.luning.graduation.service.BusinessRateService;
 import com.luning.graduation.util.CommonUtil;
+import com.luning.graduation.util.SessionKeyConst;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -168,9 +168,18 @@ public class BusinessController extends BaseController {
 
     @RequestMapping("/schedule/pass")
     @ResponseBody
-    public String passSchedule(@RequestParam("id") String id) {
-        if (businessLoanService.passSchedule(Long.valueOf(id)) == 1) {
-            return "success";
+    public String passSchedule(@RequestParam("id") String id, HttpSession session) {
+        SystemUserBo systemUserBo = (SystemUserBo) session.getAttribute(SessionKeyConst.USER_INFO);
+        BusinessLoanBo businessLoanBo = new BusinessLoanBo();
+        businessLoanBo.setId(Long.valueOf(id));
+        businessLoanBo.setUserId(systemUserBo.getId());
+        if (businessLoanService.passSchedule(businessLoanBo) == 1) {
+            Long loanSum = businessLoanService.getLoan(Long.valueOf(id)).getLoanSum();
+            if (businessLoanService.updateMoney(loanSum) == -1){
+                return "LackOfMoney";
+            }else {
+                return "success";
+            }
         } else {
             return "error";
         }
@@ -178,8 +187,12 @@ public class BusinessController extends BaseController {
 
     @RequestMapping("/schedule/refuse")
     @ResponseBody
-    public String refuseSchedule(@RequestParam("id") String id) {
-        if (businessLoanService.refuseSchedule(Long.valueOf(id)) == 1) {
+    public String refuseSchedule(@RequestParam("id") String id, HttpSession session) {
+        SystemUserBo systemUserBo = (SystemUserBo) session.getAttribute(SessionKeyConst.USER_INFO);
+        BusinessLoanBo businessLoanBo = new BusinessLoanBo();
+        businessLoanBo.setId(Long.valueOf(id));
+        businessLoanBo.setUserId(systemUserBo.getId());
+        if (businessLoanService.refuseSchedule(businessLoanBo) == 1) {
             return "success";
         } else {
             return "error";
@@ -242,5 +255,18 @@ public class BusinessController extends BaseController {
             logger.error("[BusinessController] get id:", e);
         }
         write(response, JSON.toJSONString(enumList));
+    }
+
+    @RequestMapping("/money/get")
+    public void getMoney(HttpServletRequest request,
+                          HttpServletResponse response) throws Exception {
+        logger.info("[BusinessController]req. " + request);
+        BusinessMoneyBo businessMoneyBo = new BusinessMoneyBo();
+        try {
+            businessMoneyBo = businessLoanService.getMoney(1L);
+        } catch (Exception e) {
+            logger.error("[BusinessController] get id:", e);
+        }
+        write(response, JSON.toJSONString(businessMoneyBo));
     }
 }

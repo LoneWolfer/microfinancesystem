@@ -70,4 +70,12 @@ public interface SystemUserService {
      * @return SystemUserBo 用户对象
      */
     SystemUserBo getByName(String userName);
+
+    /**
+     * 根据用户名查询账号集合
+     *
+     * @param userName 账号名
+     * @return list
+     */
+    List<SystemUserBo> listByName(String userName);
 }

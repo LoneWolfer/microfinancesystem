@@ -29,6 +29,7 @@
     <button id="search" class="layui-btn" data-type="reload">搜索</button>
     <button id="add" class="layui-btn">新增</button>
 </div>
+
 <table id="systemUser" lay-filter="systemUser"></table>
 
 <form id="modify" hidden="hidden">
@@ -98,16 +99,32 @@
         </div>
     </div>
 </form>
+<form id="auth" hidden="hidden">
+    <br>
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限角色</label>
+        <div class="layui-input-inline">
+            <select id="authS"></select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="auth">立即提交</button>
+        </div>
+    </div>
+</form>
+
 <script type="text/html" id="systemUserBar">
     <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="forbid">禁用</a>
+    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="auth">授权</a>
 </script>
 
 <script type="text/html" id="userStatus">
     {{# if(d.status == 1) { }}
-    启用
+    <span style="color: #9bca2c;">启用</span>
     {{# }else { }}
-    禁用
+    <span style="color: #F581B1;">禁用</span>
     {{# } }}
 </script>
 
@@ -147,7 +164,7 @@
                 {field: 'gmtCreate', title: '创建时间', width: 150, sort: true, templet: '#createTime'},
                 {field: 'gmtModified', title: '修改时间', width: 150, sort: true, templet: '#modifyTime '},
                 {field: 'status', title: '账号状态', width: 100, templet: '#userStatus'},
-                {fixed: 'right', width: 130, align: 'center', toolbar: '#systemUserBar'}
+                {fixed: 'right', width: 190, align: 'center', toolbar: '#systemUserBar'}
             ]]
         });
 
@@ -225,6 +242,47 @@
                     });
                     return false;
                 });
+            } else if (obj.event === 'auth') {
+                $.ajax({
+                    type: 'POST',
+                    url: '/system/role/list',
+                    success: function (result) {
+                        var data = result.data;
+                        var str = "<option value=''>请选择角色</option>";
+                        for (var i = 0, length = data.length; i < length; i++) {
+                            str += "<option value='" + data[i].id + "'>" + data[i].roleName + "</option>";
+                        }
+                        $("#authS").html(str);
+                    }
+                });
+                layer.open({
+                    type: 1,
+                    title: '信息编辑',
+                    skin: 'layui-layer-lan',
+                    shadeClose: true,
+                    area: ['400px', '200px'],
+                    content: $('#auth')
+                });
+                form.render();
+                form.on('submit(auth)', function () {
+                    var systemUrBo = {
+                        userId: data.id,
+                        roleId: parseInt($("#authS").val())
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        url: '/system/ur/update',
+                        data: systemUrBo,
+                        success: function (result) {
+                            if (result === 'success') {
+                                layer.alert("授权成功!");
+                            } else {
+                                layer.alert("授权失败!");
+                            }
+                        }
+                    });
+                    return false;
+                });
             }
         });
 
@@ -254,6 +312,8 @@
                         if (result === 'success') {
                             layer.msg("插入成功!");
                             tableIns.reload();
+                        } else if (result === 'errorName') {
+                            layer.alert("用户名已经注册!");
                         } else {
                             layer.alert("插入失败!");
                         }
@@ -273,8 +333,8 @@
                 // page: {
                 //     curr: 1 //重新从第 1 页开始
                 // },
-                where:{
-                    key:id
+                where: {
+                    key: id
                 }
             });
         })

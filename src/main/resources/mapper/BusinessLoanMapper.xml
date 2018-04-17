@@ -171,14 +171,14 @@
     from business_loan
     where loan_state = 0
   </select>
-  <update id="passSchedule" parameterType="java.lang.Long">
+  <update id="passSchedule" parameterType="com.luning.graduation.entity.BusinessLoanBo">
       update business_loan
-      set loan_state = 1
+      set loan_state = 1,user_id = #{userId,jdbcType=BIGINT}
       where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="refuseSchedule" parameterType="java.lang.Long">
+  <update id="refuseSchedule" parameterType="com.luning.graduation.entity.BusinessLoanBo">
       update business_loan
-      set loan_state = 2
+      set loan_state = 2,user_id = #{userId,jdbcType=BIGINT}
       where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="listDone" resultMap="BaseResultMap">

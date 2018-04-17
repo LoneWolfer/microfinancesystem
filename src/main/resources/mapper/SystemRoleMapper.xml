@@ -6,28 +6,34 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, role_name
+    id, gmt_create, gmt_modified, role_name, info
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+  <select id="getRole" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
-    from graduation..system_role
+    from system_role
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from graduation..system_role
+  <select id="getRoleByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from system_role
+    where role_name = #{roleName,jdbcType=VARCHAR}
+  </select>
+  <select id="listRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from system_role
+  </select>
+  <delete id="deleteRole" parameterType="java.lang.Long">
+    delete from system_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.luning.graduation.entity.SystemRoleBo">
-    insert into graduation..system_role (id, gmt_create, gmt_modified, 
-      role_name)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{roleName,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.luning.graduation.entity.SystemRoleBo">
-    insert into graduation..system_role
+  <insert id="insertRole" parameterType="com.luning.graduation.entity.SystemRoleBo">
+    insert into system_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -40,6 +46,9 @@
       </if>
       <if test="roleName != null">
         role_name,
+      </if>
+      <if test="info != null">
+        info,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -55,10 +64,13 @@
       <if test="roleName != null">
         #{roleName,jdbcType=VARCHAR},
       </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.luning.graduation.entity.SystemRoleBo">
-    update graduation..system_role
+  <update id="updateRole" parameterType="com.luning.graduation.entity.SystemRoleBo">
+    update system_role
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -69,14 +81,10 @@
       <if test="roleName != null">
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.luning.graduation.entity.SystemRoleBo">
-    update graduation..system_role
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      role_name = #{roleName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

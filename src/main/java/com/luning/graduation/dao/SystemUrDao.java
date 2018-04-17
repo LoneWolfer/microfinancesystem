@@ -15,5 +15,7 @@ public interface SystemUrDao {
      */
     SystemUrBo getSystemUr(Long userId);
 
+    int insertUr(SystemUrBo systemUrBo);
 
+    int updateUr(SystemUrBo systemUrBo);
 }

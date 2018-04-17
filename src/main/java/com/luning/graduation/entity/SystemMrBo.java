@@ -13,6 +13,8 @@ public class SystemMrBo {
 
     private Long menuId;
 
+    private int status;
+
     public Long getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class SystemMrBo {
 
     public void setMenuId(Long menuId) {
         this.menuId = menuId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

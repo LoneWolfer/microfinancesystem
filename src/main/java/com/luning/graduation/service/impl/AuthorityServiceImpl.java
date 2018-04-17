@@ -38,8 +38,73 @@ public class AuthorityServiceImpl implements AuthorityService {
         SystemUrBo systemUrBo = systemUrDao.getSystemUr(userId);
         List<SystemMrBo> systemMrBoList = systemMrDao.listSystemMr(systemUrBo.getRoleId());
         systemMrBoList.forEach(systemMrBo -> {
-            systemMenuBoList.add(systemMenuDao.getSystemMenu(systemMrBo.getMenuId()));
+            if (systemMrBo.getStatus() == 1) {
+                systemMenuBoList.add(systemMenuDao.getSystemMenu(systemMrBo.getMenuId()));
+            }
         });
         return systemMenuBoList;
+    }
+
+    @Override
+    public List<SystemRoleBo> listRole() {
+        return systemRoleDao.listRole();
+    }
+
+    @Override
+    public int deleteRole(Long id) {
+        return systemRoleDao.deleteRole(id);
+    }
+
+    @Override
+    public int updateRole(SystemRoleBo systemRoleBo) {
+        return systemRoleDao.updateRole(systemRoleBo);
+    }
+
+    @Override
+    public int insertRole(SystemRoleBo systemRoleBo) {
+        return systemRoleDao.insertRole(systemRoleBo);
+    }
+
+    @Override
+    public SystemRoleBo getRole(Long id) {
+        return systemRoleDao.getRole(id);
+    }
+
+    @Override
+    public boolean updateMrBatch(Long rId, Long[] menuIds) {
+        int result = 0;
+        for (Long menuId : menuIds) {
+            SystemMrBo systemMrBo = new SystemMrBo();
+            Long mId = systemMenuDao.getMenuByMenuId(menuId).getId();
+            systemMrBo.setRoleId(rId);
+            systemMrBo.setMenuId(mId);
+            result = systemMrDao.updateSystemMr(systemMrBo);
+        }
+        return result == 1;
+    }
+
+    @Override
+    public int clearMr(Long roleId) {
+        return systemMrDao.clearMr(roleId);
+    }
+
+    @Override
+    public int insertUr(SystemUrBo systemUrBo) {
+        return systemUrDao.insertUr(systemUrBo);
+    }
+
+    @Override
+    public int updateUr(SystemUrBo systemUrBo) {
+        return systemUrDao.updateUr(systemUrBo);
+    }
+
+    @Override
+    public int insertMr(SystemMrBo systemMrBo) {
+        return systemMrDao.insertMr(systemMrBo);
+    }
+
+    @Override
+    public SystemRoleBo getRoleByName(String roleName) {
+        return systemRoleDao.getRoleByName(roleName);
     }
 }

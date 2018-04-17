@@ -21,7 +21,7 @@
     delete from system_ur
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insertSystemUr" parameterType="com.luning.graduation.entity.SystemUrBo">
+  <insert id="insertUr" parameterType="com.luning.graduation.entity.SystemUrBo">
     insert into system_ur
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -58,22 +58,16 @@
       </if>
     </trim>
   </insert>
-  <update id="updateSystemUr" parameterType="com.luning.graduation.entity.SystemUrBo">
+  <update id="updateUr" parameterType="com.luning.graduation.entity.SystemUrBo">
     update system_ur
     <set>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

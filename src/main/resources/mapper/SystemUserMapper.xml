@@ -132,4 +132,10 @@
         from system_user
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
+    <select id="listByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from system_user
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>

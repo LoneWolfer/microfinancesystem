@@ -76,25 +76,25 @@
             var phone = $("#phone").val();
             var address = $("#address").val();
             var systemUserBo = {
-                id:parseInt($("#id").val()),
-                userName:userName,
-                password:password,
-                phone:phone,
-                address:address
+                id: parseInt($("#id").val()),
+                userName: userName,
+                password: password,
+                phone: phone,
+                address: address
             };
 
             $.ajax({
-                type:'POST',
-                url:'/system/user/update',
-                data:systemUserBo,
-                success:function (result) {
-                    if (result === 'success'){
+                type: 'POST',
+                url: '/system/account/update',
+                data: systemUserBo,
+                success: function (result) {
+                    if (result === 'success') {
                         layer.alert("更新成功!");
-                    }else {
+                    } else {
                         layer.alert("更新失败!");
                     }
                 },
-                error:function (e) {
+                error: function (e) {
                     layer.alert("error " + e);
                 }
             });

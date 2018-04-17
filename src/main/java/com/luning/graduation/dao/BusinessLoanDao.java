@@ -1,6 +1,7 @@
 package com.luning.graduation.dao;
 
 import com.luning.graduation.entity.BusinessLoanBo;
+import com.luning.graduation.entity.BusinessMoneyBo;
 import com.luning.graduation.entity.CountApplyBo;
 
 import java.util.List;
@@ -67,18 +68,18 @@ public interface BusinessLoanDao {
     /**
      * 通过贷款申请
      *
-     * @param id 贷款申请id
+     * @param businessLoanBo 贷款申请
      * @return int
      */
-    int passSchedule(Long id);
+    int passSchedule(BusinessLoanBo businessLoanBo);
 
     /**
      * 拒绝贷款申请
      *
-     * @param id 贷款申请id
+     * @param businessLoanBo 贷款申请
      * @return int
      */
-    int refuseSchedule(Long id);
+    int refuseSchedule(BusinessLoanBo businessLoanBo);
 
     /**
      * 查询所有已处理的贷款申请信息

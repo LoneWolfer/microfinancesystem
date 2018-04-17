@@ -2,6 +2,9 @@ package com.luning.graduation.service;
 
 
 import com.luning.graduation.entity.SystemMenuBo;
+import com.luning.graduation.entity.SystemMrBo;
+import com.luning.graduation.entity.SystemRoleBo;
+import com.luning.graduation.entity.SystemUrBo;
 
 import java.util.List;
 
@@ -17,4 +20,26 @@ public interface AuthorityService {
      * @return List<SystemMenuBo>
      */
     List<SystemMenuBo> listMenuByUserId(Long userId);
+
+    List<SystemRoleBo> listRole();
+
+    int deleteRole(Long id);
+
+    int updateRole(SystemRoleBo systemRoleBo);
+
+    int insertRole(SystemRoleBo systemRoleBo);
+
+    SystemRoleBo getRole(Long id);
+
+    boolean updateMrBatch(Long rId, Long[] menuIds);
+
+    int clearMr(Long roleId);
+
+    int insertUr(SystemUrBo systemUrBo);
+
+    int updateUr(SystemUrBo systemUrBo);
+
+    int insertMr(SystemMrBo systemMrBo);
+
+    SystemRoleBo getRoleByName(String roleName);
 }

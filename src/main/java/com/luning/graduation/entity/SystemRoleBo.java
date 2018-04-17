@@ -11,6 +11,8 @@ public class SystemRoleBo {
 
     private String roleName;
 
+    private String info;
+
     public Long getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class SystemRoleBo {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName == null ? null : roleName.trim();
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

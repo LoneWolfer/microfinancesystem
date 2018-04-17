@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luning.graduation.dao.BusinessMoneyDao">
+  <resultMap id="BaseResultMap" type="com.luning.graduation.entity.BusinessMoneyBo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="money" jdbcType="BIGINT" property="money" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, money
+  </sql>
+  <update id="updateMoney" parameterType="com.luning.graduation.entity.BusinessMoneyBo">
+    update business_money
+    set money = #{money,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getMoney" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from business_money
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

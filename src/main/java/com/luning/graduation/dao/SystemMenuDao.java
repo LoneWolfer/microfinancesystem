@@ -8,4 +8,6 @@ import com.luning.graduation.entity.SystemMenuBo;
  */
 public interface SystemMenuDao {
     SystemMenuBo getSystemMenu(Long id);
+
+    SystemMenuBo getMenuByMenuId(Long menuId);
 }

@@ -57,4 +57,9 @@ public class SystemUserServiceImpl implements SystemUserService {
     public SystemUserBo getByName(String userName) {
         return systemUserDao.getByName(userName);
     }
+
+    @Override
+    public List<SystemUserBo> listByName(String userName) {
+        return systemUserDao.listByName(userName);
+    }
 }
