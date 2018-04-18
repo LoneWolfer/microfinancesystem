@@ -104,7 +104,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">权限角色</label>
         <div class="layui-input-inline">
-            <select id="authS"></select>
+            <select id="authS" class="layui-select"></select>
         </div>
     </div>
     <div class="layui-form-item">

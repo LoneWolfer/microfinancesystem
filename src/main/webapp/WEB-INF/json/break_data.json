@@ -1,0 +1,61 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 6,
+  "data": [
+    {
+      "id": 1,
+      "name": "lu",
+      "loanDate": "2017-6-24",
+      "toDate": "2018-3-24",
+      "phone": "18757678342",
+      "address": "浙江杭州",
+      "credit": 756
+    },
+    {
+      "id": 2,
+      "name": "luning",
+      "loanDate": "2017-2-11",
+      "toDate": "2018-3-11",
+      "phone": "18757676666",
+      "address": "浙江杭州",
+      "credit": 686
+    },
+    {
+      "id": 3,
+      "name": "test1",
+      "loanDate": "2017-5-13",
+      "toDate": "2018-2-13",
+      "phone": "18757678342",
+      "address": "浙江杭州",
+      "credit": 756
+    },
+    {
+      "id": 4,
+      "name": "test2",
+      "loanDate": "2017-1-18",
+      "toDate": "2018-1-18",
+      "phone": "18757678342",
+      "address": "浙江杭州",
+      "credit": 658
+    },
+    {
+      "id": 5,
+      "name": "ln",
+      "loanDate": "2017-3-18",
+      "toDate": "2018-1-18",
+      "phone": "18757674444",
+      "address": "浙江杭州",
+      "credit": 733
+    },
+    {
+      "id": 6,
+      "name": "lx",
+      "loanDate": "2017-2-18",
+      "toDate": "2017-12-18",
+      "phone": "18757678342",
+      "address": "浙江杭州",
+      "credit": 783
+    }
+  ]
+}
